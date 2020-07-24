@@ -1,59 +1,49 @@
-import React, {useEffect, useState} from 'react';
-import Table from "./Components/Table";
+import React, {useState} from 'react';
 import {Route, Switch} from "react-router";
 import './App.scss'
-import Axios from "axios";
 import StartPage from "./Components/StartPage";
-import {connect} from 'react-redux'
-import {fetchData} from "./Redux/Actions/tables";
-import {Loader} from "./UI/Loader";
-import styled from "styled-components";
 import {tableMatch} from './config'
-
+import TableContainer from "./Components/TableContainer";
+import {connect} from 'react-redux'
+import ErrorBlock from "./Components/ErrorBlock";
 
 /*
 * TODO: Приложение подружает данные, когда заходим в определённую секцию
+*   1. Фильтрация
+*   4. Обработка неудавшегося запроса
 *
  */
 function App(props) {
     /*
      * Логика хранения достаточно проста, чтобы использовать стейт вместо редакса
+     * TODO:
+     *  1. Сделать добавление новых столбцов
+     *  2. Сделать поиск по фильтру
+     *
      */
     const [currentTable, handleTableChange] = useState(null);
-    useEffect(() => {
-        props.fetchData('big')
-    }, [])
-
-
-    console.log(props.isLoading)
 
     return (
         <section>
-            {console.log("is Loading", props.isLoading)}
-            {props.isLoading && <Loader/>}
-            <Switch>
-                <Route exact path='/'>
-                    <StartPage handleClick={(tableId) => handleTableChange(tableMatch[tableId])}/>
-                </Route>
-                <Route path='/big' component={Table}/>
-                <Route path='/small' component={Table}/>
-            </Switch>
-        </section>
+            {props.error ? <ErrorBlock/> :
+                <Switch>
+                    <Route exact path='/'>
+                        <StartPage handleClick={(tableId) => handleTableChange(tableMatch[tableId])}/>
+                    </Route>
+                    <Route path='/table'>
+                        <TableContainer tableId={currentTable}/>
+                    </Route>
+                </Switch>
+            }
+            </section>
+
     )
 }
 
 function mapStateToProps(state) {
     return {
-        isLoading: state.table.isLoading,
-        data: state.table.data,
         error: state.table.error
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        fetchData: type => dispatch(fetchData(type))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
