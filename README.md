@@ -7,7 +7,7 @@ Stack used in project:
 4. Proptypes
 
 #### This project comes with docker-prepared image
-If you want to run docker container without any setup,  use these commands:
+If you want to run docker container without any setup,  use these commands: <br/>
 `docker build -f Dockerfile -t table:prod` <br/>
 `docker run -it --rm -p 4000:80 table:prod`
 
