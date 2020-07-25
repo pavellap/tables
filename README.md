@@ -1,4 +1,4 @@
-## Test task: Building table [](https://github.com/fugr-ru/frontend-javascript-test)
+## Test task:  [Building table](https://github.com/fugr-ru/frontend-javascript-test)
 
 Stack used in project:
 1. React, React-Router
