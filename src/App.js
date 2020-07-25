@@ -1,28 +1,15 @@
 import React, {useState} from 'react';
 import {Route, Switch} from "react-router";
-import './App.scss'
-import StartPage from "./Components/StartPage";
-import {tableMatch} from './config'
-import TableContainer from "./Components/TableContainer";
+import './Components/Styles/App.scss'
+import StartPage from "./Components/StartPage/StartPage";
+import {tableMatch} from './Utils/config'
+import TableContainer from "./Components/Table/TableContainer";
 import {connect} from 'react-redux'
-import ErrorBlock from "./Components/ErrorBlock";
+import ErrorBlock from "./UI/ErrorBlock";
+import PropsTypes from 'prop-types'
 
-/*
-* TODO: Приложение подружает данные, когда заходим в определённую секцию
-*   1. Фильтрация
-*   4. Обработка неудавшегося запроса
-*
- */
 function App(props) {
-    /*
-     * Логика хранения достаточно проста, чтобы использовать стейт вместо редакса
-     * TODO:
-     *  1. Сделать добавление новых столбцов
-     *  2. Сделать поиск по фильтру
-     *
-     */
     const [currentTable, handleTableChange] = useState(null);
-
     return (
         <section>
             {props.error ? <ErrorBlock/> :
@@ -38,6 +25,10 @@ function App(props) {
             </section>
 
     )
+}
+
+App.propTypes = {
+    error: PropsTypes.object
 }
 
 function mapStateToProps(state) {

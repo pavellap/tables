@@ -1,16 +1,3 @@
-/*const parseObject = object => {
-    let result = [];
-    Object.values(object).forEach(item => {
-        if (item instanceof Object) {
-            result = result.concat(Object.values(item))
-        }
-        else {
-            result.push(item);
-        }
-    })
-    return result;
-}*/
-
 const normalizeObject = object => {
     const array = [];
     object.forEach(item => {
@@ -46,4 +33,4 @@ const parseKeys = object => {
 
 const normalizeString = string =>  string.length > 25 ?string.slice(0, 25) + "..." : string;
 
-export {/*parseObject,*/ normalizeString, parseKeys, normalizeObject}
+export {normalizeString, parseKeys, normalizeObject}

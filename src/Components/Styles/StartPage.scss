@@ -1,0 +1,35 @@
+@mixin sb-justify {
+  display: flex;
+  justify-content: space-between;
+}
+
+.start-page__container {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  h1 {
+    text-align: center;
+    font-weight: normal;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 10px;
+  }
+  a {
+      @include sb-justify;
+      width: 70%;
+      margin: 10px auto;
+      border-radius: 13px;
+      text-decoration: none;
+      color: #111;
+      padding: 12px 15px;
+      &:hover {
+        background-color: #EAF4EC;
+      }
+  }
+}
+
+.start-page__header {
+    @include sb-justify;
+    width: 70%;
+    margin: 10px auto;
+    font-size: 20px;
+}

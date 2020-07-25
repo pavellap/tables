@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import {TextField, Button} from "@material-ui/core";
 import {connect} from 'react-redux'
-import {addTableEntry} from "../Redux/Actions/TableActions";
+import {addTableEntry} from "../../Redux/Actions/TableActions";
 
 const ModalBlock = styled.div`
     padding: 40px 20px;
@@ -21,24 +21,23 @@ const ModalBlock = styled.div`
 
 function Form(props) {
 
-    const [formsContent, handleFormsContent] = useState(props.titles.reduce((o, key) => ({ ...o, [key]: ""}), {}))
-    const [error, handleFieldError] = useState(props.titles.reduce((o, key) => ({ ...o, [key]: false}), {}))
-
+    const [formsContent, handleFormsContent] = useState(props.titles.reduce
+        ((o, key) => ({ ...o, [key]: ""}), {}))
+    const [error, handleFieldError] = useState(props.titles.reduce
+        ((o, key) => ({ ...o, [key]: false}), {}))
 
     const validateForm = () => {
         let status = true;
-        for (const [key, value] of Object.entries(formsContent)) {
+        for (let [key, value] of Object.entries(formsContent)) {
             const copy = handleFieldError;
             if (value === "") {
                 status = false
                 copy[key] = true;
             }
-
             handleFieldError(prevState => {
                 return {...prevState, ...copy}
             })
         }
-        console.log("Status before submit:", status)
         if (status)
             props.submit(formsContent)
     }

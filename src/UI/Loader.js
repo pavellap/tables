@@ -10,6 +10,6 @@ const Wrapper = styled.div`
     align-items: center;
 `
 
-const Loader = () => (<Wrapper><CircularProgress/></Wrapper>)
+export const Loader = () =>  (<Wrapper><CircularProgress/></Wrapper>)
 
-export {Loader};
+

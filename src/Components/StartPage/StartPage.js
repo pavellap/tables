@@ -1,7 +1,7 @@
 import React from "react";
 import {NavLink} from 'react-router-dom'
-import {Container, Header, NavItem} from "./StyledComponents";
-
+import '../Styles/StartPage.scss'
+import PropsTypes from 'prop-types'
 
 const navData = [
     {
@@ -16,26 +16,26 @@ const navData = [
 
 function StartPage(props) {
     return (
-        <Container>
+        <section className='start-page__container'>
             <h1>Панель управления таблицами</h1>
-            <Header>
+            <header className='start-page__header'>
                 <span>Название</span>
                 <span>Дата создания</span>
-            </Header>
+            </header>
             {navData.map((item, index) =>
-                <NavItem key={index} onClick={() => props.handleClick(index)}>
+                <div key={index} onClick={() => props.handleClick(index)}>
                     <NavLink to={'/table'}>
                         <span>{item.title}</span>
                         <span>{item.date}</span>
                     </NavLink>
-                </NavItem>
+                </div>
             )}
-        </Container>
+        </section>
     )
 }
 
-
-
-
+StartPage.propTypes = {
+    handleClick: PropsTypes.func
+}
 
 export default StartPage
